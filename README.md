@@ -3,8 +3,7 @@
 Install python3 mysql driver [mysqlclient](https://github.com/PyMySQL/mysqlclient-python) on alpine linux.
 
 
-* Total Size: **101 MB**
-  * Based image: `python:3.6.1-alpine`(**88.7 MB**)
+* Total size **101 MB**, compressed size **34 MB**
 * Why mysqlclient ? [Answers on stackoverflow](https://stackoverflow.com/questions/4960048/python-3-and-mysql)
 
 
@@ -14,10 +13,10 @@ First, a mariadb container named **my-mariadb** is running.
 
 ```bash
 >> docker ps 
-d627912ec946        mariadb             "docker-entrypoint..."   6 days ago          Up 6 days           0.0.0.0:3306->3306/tcp                                                          my-mariadb
+d627912ec946    mariadb   "docker-entrypoint..."   6 days ago     Up 6 days     0.0.0.0:3306->3306/tcp     my-mariadb
 ```
 
-Run this mysqlclient driver linked with **my-mariadb**
+Run this mysqlclient driver linked with **my-mariadb**.
 
 ```bash
 docker run -it --link my-mariadb:mysql py3-mysqlclient-alpine python
@@ -31,7 +30,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ```
 
-* For more info about `--link`, click https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/#communication-across-links
+* For more info about `--link` https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/#communication-across-links
 * Some examples about MySQLdb https://github.com/PyMySQL/mysqlclient-python/blob/master/doc/user_guide.rst#some-examples
 
 In most cases, you will build your own image based on this.
