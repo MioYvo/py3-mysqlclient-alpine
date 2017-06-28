@@ -3,7 +3,7 @@
 from redis import Redis
 
 # --------------------     redis    --------------------
-r = Redis("redis")
+r = Redis(host="127.0.0.1")
 
 # --------------------    MySQLdb   --------------------
 CONNECT_TIMEOUT = 3
