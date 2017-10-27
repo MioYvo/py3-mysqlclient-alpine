@@ -3,6 +3,9 @@
 """
 Mysql parser
 """
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname("__file__"), os.pardir)))
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
@@ -10,14 +13,15 @@ from tornado.log import app_log
 from tornado.options import define, options
 
 from parser.urls import urls
-from parser.settings import settings
+from parser.settings import settings, scheduler
 
-
-define("port", default=6464, help="run on the given port", type=int)
+define("port", default=80, help="run on the given port", type=int)
 
 
 class Application(tornado.web.Application):
     def __init__(self):
+        scheduler.start()
+        scheduler.add_job()
         tornado.web.Application.__init__(self, urls, **settings)
 
 

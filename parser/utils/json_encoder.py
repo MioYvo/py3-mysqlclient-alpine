@@ -5,16 +5,15 @@ import json
 from decimal import Decimal
 from datetime import datetime, date, timedelta
 
-from tornado.escape import to_basestring
+from tornado.escape import native_str
 
 from .gtz import datetime_2_string
 
 
-# noinspection PyTypeChecker
 class MySQLQueryEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, bytes):
-            return to_basestring(obj)
+            return native_str(obj)
         if isinstance(obj, (datetime, date)):
             return datetime_2_string(obj)
         if isinstance(obj, timedelta):

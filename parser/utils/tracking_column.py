@@ -8,6 +8,7 @@ from parser.settings import r
 from parser.utils.gtz import datetime_2_string, SQL_DATETIME_FORMAT
 from datetime import datetime
 
+
 class TypeNotFoundException(Exception):
     def __init__(self, message):
         self.message = message
@@ -16,6 +17,7 @@ class TypeNotFoundException(Exception):
 class NotPickleLoadException(Exception):
     def __init__(self, message):
         self.message = message
+
 
 STARTING_TYPE_MAP = {
     "timestamp": datetime.fromtimestamp(0),

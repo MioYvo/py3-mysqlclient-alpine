@@ -7,7 +7,7 @@ from MySQLdb.cursors import DictCursor
 from schema import Schema, Use, Optional
 from tornado.log import app_log
 
-from parser.settings import CONNECT_TIMEOUT, CHARSET
+from parser.settings import MYSQL_CONNECT_TIMEOUT, MYSQL_CONNECT_CHARSET
 from parser.utils.gtornado.web import BaseRequestHandler
 from parser.utils.json_encoder import MySQLQueryEncoder
 from parser.utils.tracking_column import get_tracking_column, set_last_row, TypeNotFoundException, \
@@ -43,7 +43,7 @@ class FetchDataHandler(BaseRequestHandler):
             db = connect(
                 host=data['host'], port=data['port'], user=data['user'],
                 password=data['password'], database=data['database'],
-                connect_timeout=CONNECT_TIMEOUT, charset=CHARSET,
+                connect_timeout=MYSQL_CONNECT_TIMEOUT, charset=MYSQL_CONNECT_CHARSET,
                 cursorclass=DictCursor
             )
             cur = db.cursor()

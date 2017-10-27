@@ -1,35 +1,10 @@
 FROM python:3.6.1-alpine
-
-RUN echo 'https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.4/main' > /etc/apk/repositories && \
-    echo 'https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.4/community' >> /etc/apk/repositories && \
+COPY . /mysql-parser/
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirror.tuna.tsinghua.edu.cn/g' /etc/apk/repositories &&\
     apk add --no-cache mariadb-dev g++ && \
-    # (1/25) Upgrading musl (1.1.14-r14 -> 1.1.14-r15)
-    # (2/25) Installing libgcc (5.3.0-r0)
-    # (3/25) Installing libstdc++ (5.3.0-r0)
-    # (4/25) Installing binutils-libs (2.26-r1)
-    # (5/25) Installing binutils (2.26-r1)
-    # (6/25) Installing gmp (6.1.0-r0)
-    # (7/25) Installing isl (0.14.1-r0)
-    # (8/25) Installing libgomp (5.3.0-r0)
-    # (9/25) Installing libatomic (5.3.0-r0)
-    # (10/25) Installing pkgconf (0.9.12-r0)
-    # (11/25) Installing pkgconfig (0.25-r1)
-    # (12/25) Installing mpfr3 (3.1.2-r0)
-    # (13/25) Installing mpc1 (1.0.3-r0)
-    # (14/25) Installing gcc (5.3.0-r0)
-    # (15/25) Installing musl-dev (1.1.14-r15)
-    # (16/25) Installing libc-dev (0.7-r0)
-    # (17/25) Installing g++ (5.3.0-r0)
-    # (18/25) Upgrading musl-utils (1.1.14-r14 -> 1.1.14-r15)
-    # (19/25) Installing zlib-dev (1.2.11-r0)
-    # (20/25) Installing openssl-dev (1.0.2k-r0)
-    # (21/25) Installing mariadb-common (10.1.22-r0)
-    # (22/25) Installing mariadb-client-libs (10.1.22-r0)
-    # (23/25) Installing libaio (0.3.110-r0)
-    # (24/25) Installing mariadb-libs (10.1.22-r0)
-    # (25/25) Installing mariadb-dev (10.1.22-r0)
-    pip install --no-cache-dir -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com mysqlclient && \
+    pip install --no-cache-dir -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com -r /mysql-parser/requirements.txt && \
     apk del g++ mariadb-dev && \
     apk add --no-cache mariadb-client-libs
 
-CMD ["ash"]
+WORKDIR /mysql-parser/parser
+CMD ["python", "run_server.py"]
