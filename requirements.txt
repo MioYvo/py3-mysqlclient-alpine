@@ -13,4 +13,4 @@ six==1.11.0
 tornado==4.5.2
 tzlocal==1.4
 ujson==1.35
-urllib3==1.22
+urllib3==1.24.2
