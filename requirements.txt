@@ -12,5 +12,5 @@ schema==0.6.6
 six==1.11.0
 tornado==4.5.2
 tzlocal==1.4
-ujson==1.35
+ujson==5.2.0
 urllib3==1.26.5
